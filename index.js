@@ -16,10 +16,19 @@ const person = {
     
 }
 let i = 0
-setInterval(() => {
-
-    console.log(++i)
+const stopIt = setInterval(() => {
+    i++
+    console.log(i)
+    if( i == 10){
+        clearInterval(stopIt)
+    }
+       
 },1000);
+
+
+
+
+
 
 
 const fetchData = (callback)=>{
