@@ -33,9 +33,22 @@ const stopIt = setInterval(() => {
 
 const fetchData = (callback)=>{
     setTimeout(() => {
-        callback("hello world")
+        callback("hi")
+            console.log("this is amazing")
+        
     }, 1000);
 }
+
+function Fetchdata(func){
+    console.log("this is old function")
+    setTimeout(() => {
+        func("old is gold")
+    }, 1000);
+}
+
+Fetchdata(function(c){
+    console.log(c)
+})
 
 
 
@@ -45,7 +58,7 @@ fetchData( (cb)=>{
     console.log("inside")
     setTimeout(() => {
         console.log(cb)
-    }, 5000);
+        }, 5000);
    
 })
 
