@@ -4,8 +4,6 @@
 //     const promise = new promise(res,rej){
 //         res("hello world")
 
-const { promises } = require("dns");
-
 
 //         return promise;
 //     }
@@ -67,16 +65,16 @@ function tatkalTicket(price,booked,failed){
 //     console.log(msg)
 // })
 
-function fakePromise(url){
+ const fakePromise =(url)=>{
     return new Promise((res,rej)=>{
         const delay = Math.floor(Math.random() *10) *100;
 
         setTimeout(() => {
             if(delay< 300){
-                res()
+                res("resolve")
             }
             else{
-                rej()
+                rej("rejected")
             }
 
         }, delay);
@@ -88,6 +86,12 @@ const request = fakePromise("mommnetoo")
 
 request.then(()=>{
     console.log("it worked")
-}).catch(()=>{
+    fakePromise("second").then(()=>{
+        console.log("again worked")
+    }).catch(()=>{
+        console.log("agin not worked")
+    })
+    
+}).catch(()=>{   
     console.log("oh No")
 })
