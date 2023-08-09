@@ -4,6 +4,8 @@
 //     const promise = new promise(res,rej){
 //         res("hello world")
 
+const { promises } = require("dns");
+
 
 //         return promise;
 //     }
@@ -51,16 +53,41 @@ function tatkalTicket(price,booked,failed){
 
 
 
-tatkalTicket("firtsTry",function(msg){
+// tatkalTicket("firtsTry",function(msg){
 
-console.log(msg)
+// console.log(msg)
 
-tatkalTicket("2ndTry",function(secMsg){
-    console.log("2nd time "+secMsg)
-},function(errMsg){
-    console.log("2nd time not able to make ticket"+errMsg)
-})
+// tatkalTicket("2ndTry",function(secMsg){
+//     console.log("2nd time "+secMsg)
+// },function(errMsg){
+//     console.log("2nd time not able to make ticket"+errMsg)
+// })
 
-},function(msg){
-    console.log(msg)
+// },function(msg){
+//     console.log(msg)
+// })
+
+function fakePromise(url){
+    return new Promise((res,rej)=>{
+        const delay = Math.floor(Math.random() *10) *100;
+
+        setTimeout(() => {
+            if(delay< 300){
+                res()
+            }
+            else{
+                rej()
+            }
+
+        }, delay);
+    });
+}
+
+
+const request = fakePromise("mommnetoo")
+
+request.then(()=>{
+    console.log("it worked")
+}).catch(()=>{
+    console.log("oh No")
 })
