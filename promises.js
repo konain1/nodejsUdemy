@@ -82,16 +82,34 @@ function tatkalTicket(price,booked,failed){
 }
 
 
-const request = fakePromise("mommnetoo")
 
-request.then(()=>{
-    console.log("it worked")
-    fakePromise("second").then(()=>{
-        console.log("again worked")
-    }).catch(()=>{
-        console.log("agin not worked")
-    })
+// Nested promise
+
+// const request = fakePromise("mommnetoo")
+
+// request.then(()=>{
+//     console.log("it worked")
+//     fakePromise("second").then(()=>{
+//         console.log("again worked")
+//     }).catch(()=>{
+//         console.log("agin not worked")
+//     })
     
-}).catch(()=>{   
-    console.log("oh No")
+// }).catch(()=>{   
+//     console.log("oh No")
+// })
+
+
+// better Approach Promise
+
+fakePromise("konain7.com").then(function(){
+    console.log("firstTime worked")
+    return fakePromise("ko9.com")
+}).then(function(){
+    console.log("second time worked");
+    return fakePromise("kaif7.com")
+}).then(function(){
+    console.log("third time also worked")
+}).catch(()=>{
+    console.log("Errr!!!!")
 })
