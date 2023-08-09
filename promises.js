@@ -112,4 +112,4 @@ fakePromise("konain7.com").then(function(){
     console.log("third time also worked")
 }).catch(()=>{
     console.log("Errr!!!!")
-})
+})  
