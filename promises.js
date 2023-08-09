@@ -51,9 +51,15 @@ function tatkalTicket(price,booked,failed){
 
 
 
-tatkalTicket(700,function(msg){
+tatkalTicket("firtsTry",function(msg){
 
 console.log(msg)
+
+tatkalTicket("2ndTry",function(secMsg){
+    console.log("2nd time "+secMsg)
+},function(errMsg){
+    console.log("2nd time not able to make ticket"+errMsg)
+})
 
 },function(msg){
     console.log(msg)
