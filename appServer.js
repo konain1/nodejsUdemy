@@ -1,5 +1,7 @@
 
 const http = require('http')
+const express = require('express')
+const app = express();
 const fs = require('fs')
 
 function rqListener(req,res){
@@ -14,7 +16,20 @@ function rqListener(req,res){
         return res.end();
     }
     if(url === '/message' && method==='POST'){
-        fs.writeFileSync('message.txt','dummy');
+
+        let body = []
+        req.on('data',(chunk)=>{
+            console.log(chunk.toString())
+            body.push(chunk)
+        })
+
+        req.on('end',()=>{
+            const parserbody = Buffer.concat(body).toString();
+            const msg = parserbody.split('=')[1]
+            fs.writeFileSync('message.txt',msg)
+        })
+
+        // fs.writeFileSync('message.txt','dummy');
         res.statusCode =302;
         res.setHeader('location','/')
         return res.end()
@@ -29,9 +44,18 @@ function rqListener(req,res){
     res.end()
 }
 
+app.use((req,res,next)=>{
+    console.log('middleware')
+    next();
+})
 
-const server = http.createServer(rqListener)
+app.use((req,res,next)=>{
+    console.log('another middleware')
+})
 
-server.listen(3002,()=>{
-    console.log("server running on port 3002")
+
+const server = http.createServer(app)
+
+server.listen(3010,()=>{
+    console.log("server running on port 3010")
 })
