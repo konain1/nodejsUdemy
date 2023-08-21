@@ -4,29 +4,23 @@ const bodyparser = require('body-parser')
 
 
 const app = express();
+const adminRoute = require('./Router/admin')
+const shopRoute = require('./Router/shop.js')
 
 
 
 
-app.use(bodyparser.urlencoded({extended:false}))
-app.use('/add-product',(req,res,next)=>{
-    res.send(` <form action='/product' method='POST'>
-    <label for="textInput">Input:</label>
-    <input type="text" id="textInput" name="textInput"  required>
-    <br><br>
-    <input type="submit" value="Submit">
-</form>`)
+
+app.use(bodyparser.urlencoded({extended:false}))    
+
+app.use('/admin',adminRoute)
+
+app.use(shopRoute)
+
+app.use((req,res,next)=>{
+    res.status(404).send(`<h1>page not found</h1>`)
 })
 
-app.use('/product',(req,res,next)=>{
-    console.log(req.body)
-    res.redirect('/')
-})
-
-app.use('/',(req,res,next)=>{
-    console.log('in the middle ware ')
-    res.send(`<h1>'hello'</h1>`)
-})
 
 
 app.listen(3003)
